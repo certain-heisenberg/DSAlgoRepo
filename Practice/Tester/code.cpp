@@ -14,7 +14,7 @@ int main(){
 	for(long long i = 1;i<=n;i++){
 		sum+=a[i];
 	}
-	if(sum==sum2/2) cout<<"-1";
+	if(sum==sum2/2 && sum2%2==0) cout<<"-1";
 	else for(long long i = 1;i<=2*n;i++) cout<<a[i]<<" ";
 	cout<<endl;
 }

@@ -25,8 +25,6 @@ char dir[4]={'D','R','U','L'};
 const int maxN=1e5+5;
 
 void solve(){
-	int n,m,k;
-	cin>>n>>m>>k;
 	
 	
 }

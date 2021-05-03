@@ -1,11 +1,9 @@
 #include<bits/stdc++.h>
-using namespace std;
-
 #define pb push_back
+using namespace std;
 int a[22];
 int b[22];
 int n;
-
 int readAns(ifstream &fin){
     int ans;
     fin>>ans;
@@ -24,11 +22,11 @@ int readAns(ifstream &fin){
     }
     return 1;                           // Correct answer
 }
-
 int main(int argc, char * argv[]){
-    ifstream fin("input_file", ifstream::in);
-    ifstream ans("myAnswer", ifstream::in);
-    ifstream cor("correctAnswer", ifstream::in);
+    ifstream fin("int.txt", ifstream::in);
+    ifstream ans("myAnswer.txt", ifstream::in);
+    ifstream cor("correctAnswer.txt", ifstream::in);
+    
     fin>>n;
     for(int i=0;i<2*n;i++)fin>>a[i];
     sort(a,a+2*n);
