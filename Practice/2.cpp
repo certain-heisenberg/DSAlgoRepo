@@ -20,13 +20,10 @@ int dy[4]={0,1,0,-1};
 char dir[4]={'D','R','U','L'};
  
 //****DO NOT TOUCH ABOVE THIS LINE****//
-#define kk
  
 const int maxN=1e5+5;
 
 void solve(){
-	int n,m,k;
-	cin>>n>>m>>k;
 	
 	
 }
