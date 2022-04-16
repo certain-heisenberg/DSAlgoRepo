@@ -71,7 +71,6 @@ void merge(int a, int b){
 }
 
 //****DO NOT TOUCH ABOVE THIS LINE****//
-#define kk
 
 const int maxN=2e5+5;
 
