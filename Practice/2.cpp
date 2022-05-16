@@ -22,9 +22,53 @@ char dir[4]={'D','R','U','L'};
 //****DO NOT TOUCH ABOVE THIS LINE****//
  
 const int maxN=1e5+5;
+struct Counter{
+	int ones;
+	int zeros;
+	int zerosLeft;
+};
 
 void solve(){
-	
+	string s;
+	cin>>s;
+
+	int n=s.size(), cZeros=0;
+
+	for(auto c: s){
+		if(c=='0') {
+			cZeros++;
+		}
+	}
+
+	vector<Counter> l2r(n), r2l(n);
+
+	rep(i,0,n){
+		if(i==0){
+			l2r[i].ones = s[i]-'0' == 1 ? 1 : 0;
+			l2r[i].zeros = s[i]-'0' == 0 ? 1 : 0;
+		}
+		else{
+			l2r[i].ones = (s[i]-'0' == 1 ? 1 : 0) + l2r[i-1].ones;
+			l2r[i].zeros = (s[i]-'0' == 0 ? 1 : 0) + l2r[i-1].zeros;
+		}
+		l2r[i].zerosLeft = cZeros - l2r[i].zeros;
+	}
+
+	rrep(i,0,n-1){
+		if(i==n-1){
+			r2l[i].ones = s[i]-'0' == 1 ? 1 : 0;
+			r2l[i].zeros = s[i]-'0' == 0 ? 1 : 0;
+		}
+		else{
+			r2l[i].ones = (s[i]-'0' == 1 ? 1 : 0) + r2l[i+1].ones;
+			r2l[i].zeros = (s[i]-'0' == 0 ? 1 : 0) + r2l[i+1].zeros;
+		}
+		r2l[i].zerosLeft = cZeros - r2l[i].zeros;
+	}
+
+	rep(i,0,n){
+		cout<<l2r[i].ones<<" "<<l2r[i].zerosLeft<<" -- "<<r2l[n-i-1].ones<<" "<<r2l[n-i-1].zerosLeft<<"\n";
+	}
 	
 }
  

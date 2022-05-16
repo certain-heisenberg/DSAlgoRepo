@@ -28,7 +28,7 @@ int power(int a, int n){
 	return res%mod;
 }
 
-void init(){
+void fact_init(){
 	fact[0]=inv_fact[0]=1;
 	
 	for(int i=1; i<naxN; i++){
@@ -42,9 +42,6 @@ int ncr(int a, int b){
 	
 	return (fact[a]%mod*inv_fact[b]%mod*inv_fact[a-b]%mod)%mod;
 }
-
-//int dx[8]={-1, -1, -1, 0, 1, 1, 1, 0};
-//int dy[8]={-1, 0, 1, 1, 1, 0, -1, -1};
 
 int par[30];
 int R[30];
@@ -70,17 +67,19 @@ void merge(int a, int b){
 	}
 }
 
-//****DO NOT TOUCH ABOVE THIS LINE****//
-
 const int maxN=2e5+5;
 
+//int dx[8]={-1, -1, -1, 0, 1, 1, 1, 0};
+//int dy[8]={-1, 0, 1, 1, 1, 0, -1, -1};
 int dx[4]={1,0,-1,0};
 int dy[4]={0,1,0,-1};
 
-bool isValid(int a, int b){
+bool isValid(int a, int b, int n, int m){
 	if(a<0 || a>=n || b<0 || b>=m) return false;
 	return true;
 }
+
+//****DO NOT TOUCH ABOVE THIS LINE****//
 
 void solve(){
 	
