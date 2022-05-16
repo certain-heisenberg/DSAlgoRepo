@@ -35,7 +35,7 @@ void range_update(int l, int r, int k){
 }
 
 int point_query(int i){
-	return query(i);
+	return query(i)-query(i-1);
 }
 
 // (#) Range Update and Range Query

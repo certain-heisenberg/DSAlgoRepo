@@ -77,103 +77,13 @@ const int maxN=2e5+5;
 int dx[4]={1,0,-1,0};
 int dy[4]={0,1,0,-1};
 
-vector<string> v;
-vector<vector<bool>> vis;
-
-int n,m;
-
 bool isValid(int a, int b){
 	if(a<0 || a>=n || b<0 || b>=m) return false;
 	return true;
 }
 
-bool isBlackAround(int x, int y){
-	int W=0, B=0;
-	
-	for(int i=0; i<4; i++){
-		int a=x+dx[i];
-		int b=y+dy[i];
-		if(isValid(a, b)){
-			if(v[a][b]=='W') W=1;
-			if(v[a][b]=='B') B=1;
-		}
-	}
-	
-	if(B && W) return false;
-	
-	if(B) return true;
-	return false;
-}
-
-bool isWhiteAround(int x, int y){
-	int W=0, B=0;
-	
-	for(int i=0; i<4; i++){
-		int a=x+dx[i];
-		int b=y+dy[i];
-		if(isValid(a, b)){
-			if(v[a][b]=='W') W=1;
-			if(v[a][b]=='B') B=1;
-		}
-	}
-	
-	if(B && W) return false;
-	
-	if(W) return true;
-	return false;
-}
-
-void dfs(int x, int y, int cnt, int N){
-	if(cnt==N) return;
-	
-	for(int i=0; i<4; i++){
-		int a=x+dx[i];
-		int b=y+dy[i];
-
-		if(isValid(a, b) && !vis[a][b]){
-			if(v[a][b]=='-'){
-				vis[a][b]=1;
-				dfs(a, b, cnt, N);
-				//vis[a][b]=0;
-			}
-			else if(isBlackAround(a, b)){
-				v[a][b]='W';
-				vis[a][b]=1;
-				dfs(a, b, cnt+1 ,N);
-				//v[a][b]='.';
-				//vis[a][b]=0;
-			}
-			else if(isWhiteAround(a, b)){
-				v[a][b]='B';
-				vis[a][b]=1;
-				dfs(a, b, cnt+1, N);
-				//v[a][b]='.';
-				//vis[a][b]=0;
-			}
-		}
-	}
-}
-
 void solve(){
-	cin>>n>>m;
 	
-	cin.ignore();
-	
-	v.resize(n);
-	vis.resize(n, vector<bool> (m, 0));
-	
-	int N=0;
-	
-	for(int i=0; i<n; i++){
-		cin>>v[i];
-		for(auto c: v[i]) if(c=='.') N++;
-	}	
-	
-	if(v[0][0]=='.') v[0][0]='B';
-	
-	dfs(0,0,0,N);
-	
-	for(auto c: v) cout<<c<<endl;
 }
 
 //****DO NOT TOUCH BELOW THIS LINE****//
