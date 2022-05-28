@@ -11,12 +11,19 @@ using namespace std;
 #define pi pair<int, int>
 #define inf 1000000000
 #define mod 1000000007
+#define rep(i,a,b) for(int i=a; i<b; i++)
+#define rrep(i,a,b) for(int i=b; i>=a; i--)
 //#define endl "\n"
 
 const ll INF=1e18+5;
 
 const int naxN=2e1+5;
 int fact[naxN], inv_fact[naxN];
+
+int gcd(int a, int b){
+	if(b==0) return a;
+	return gcd(b,a%b);
+}
 
 int power(int a, int n){
 	int res=1;
@@ -102,7 +109,7 @@ signed main(){
 	//preprocess();
 		
 	int T=1;
-	//cin>>T;
+	cin>>T;
 
 	while(T--){
 		solve();
