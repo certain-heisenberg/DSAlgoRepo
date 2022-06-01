@@ -4,59 +4,59 @@ using namespace std;
 #define endl "\n"
 
 struct TrieNode{
-	map<char, TrieNode*> child;
-	bool isEnd;
+	map<char, TrieNode*> childList;
+	bool isWordEnd;
 };
 
 TrieNode* GetNewNode(){
-	TrieNode* x=new TrieNode();
-	x->child.clear();
-	x->isEnd=false;
-	return x;
+	TrieNode* curNode=new TrieNode();
+	curNode->childList.clear();
+	curNode->isWordEnd=false;
+	return curNode;
 }
 
 /* Inserts a string "s" into the trie */
 TrieNode* insert(string s, TrieNode* root){
-	TrieNode* x=root;
+	TrieNode* curNode=root;
 	
 	for(int i=0; i<s.size(); i++){
-		map<char, TrieNode*> &mp=x->child;
-		if(mp.find(s[i])==mp.end()){
-			mp[s[i]]=GetNewNode();
+		map<char, TrieNode*> &childList=curNode->childList;
+		if(childList.find(s[i])==childList.end()){
+			childList[s[i]]=GetNewNode();
 		}
-		x=mp[s[i]];
+		curNode=childList[s[i]];
 	}
 	
-	x->isEnd=true;
+	curNode->isWordEnd=true;
 	return root;
 }
 
 /* Returns true if the string "s" is in the trie */
 bool search(string s, TrieNode* root){
-	TrieNode* x=root;
+	TrieNode* curNode=root;
 	
 	for(int i=0; i<s.size(); i++){
-		map<char, TrieNode*> &mp=x->child;
-		if(mp.find(s[i])==mp.end()){
+		map<char, TrieNode*> &childList=curNode->childList;
+		if(childList.find(s[i])==childList.end()){
 			return false;
 		}
-		x=mp[s[i]];
+		curNode=childList[s[i]];
 	}
 	
-	return x->isEnd;
+	return curNode->isWordEnd;
 }
 
 /* Returns true if there is any string in the trie 
-   that starts with the given prefix string "s" */
+   that starts with the given preficurNode string "s" */
 bool startsWith(string s, TrieNode* root){
-	TrieNode* x=root;
+	TrieNode* curNode=root;
 	
 	for(int i=0; i<s.size(); i++){
-		map<char, TrieNode*> &mp=x->child;
-		if(mp.find(s[i])==mp.end()){
+		map<char, TrieNode*> &childList=curNode->childList;
+		if(childList.find(s[i])==childList.end()){
 			return false;
 		}
-		x=mp[s[i]];
+		curNode=childList[s[i]];
 	}
 	
 	return true;
