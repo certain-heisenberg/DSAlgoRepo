@@ -4,27 +4,22 @@ using namespace std;
 #define endl "\n"
 
 struct TrieNode{
-	map<char, TrieNode*> childList;
-	bool isWordEnd;
+	// array implementation for child list is faster than its std::map imlementaion
+	TrieNode* childList[26]={NULL}; 
+	bool isWordEnd=false;
 };
-
-TrieNode* GetNewNode(){
-	TrieNode* curNode=new TrieNode();
-	curNode->childList.clear();
-	curNode->isWordEnd=false;
-	return curNode;
-}
 
 /* Inserts a string "s" into the trie */
 TrieNode* insert(string s, TrieNode* root){
 	TrieNode* curNode=root;
 	
 	for(int i=0; i<s.size(); i++){
-		map<char, TrieNode*> &childList=curNode->childList;
-		if(childList.find(s[i])==childList.end()){
-			childList[s[i]]=GetNewNode();
+		int k=s[i]-'a';
+		TrieNode** childList=curNode->childList;
+		if(childList[k]==NULL){
+			childList[k]=new TrieNode();
 		}
-		curNode=childList[s[i]];
+		curNode=childList[k];
 	}
 	
 	curNode->isWordEnd=true;
@@ -36,11 +31,12 @@ bool search(string s, TrieNode* root){
 	TrieNode* curNode=root;
 	
 	for(int i=0; i<s.size(); i++){
-		map<char, TrieNode*> &childList=curNode->childList;
-		if(childList.find(s[i])==childList.end()){
+		int k=s[i]-'a';
+		TrieNode** childList=curNode->childList;
+		if(childList[k]==NULL){
 			return false;
 		}
-		curNode=childList[s[i]];
+		curNode=childList[k];
 	}
 	
 	return curNode->isWordEnd;
@@ -52,11 +48,12 @@ bool startsWith(string s, TrieNode* root){
 	TrieNode* curNode=root;
 	
 	for(int i=0; i<s.size(); i++){
-		map<char, TrieNode*> &childList=curNode->childList;
-		if(childList.find(s[i])==childList.end()){
+		int k=s[i]-'a';
+		TrieNode** childList=curNode->childList;
+		if(childList[k]==NULL){
 			return false;
 		}
-		curNode=childList[s[i]];
+		curNode=childList[k];
 	}
 	
 	return true;
@@ -64,7 +61,7 @@ bool startsWith(string s, TrieNode* root){
 
 
 int main(){
-	TrieNode* root=GetNewNode();
+	TrieNode* root=new TrieNode();
 	
 	vector<string> v={"apple", "application", "ballboy", "baller", "geany"};
 	
