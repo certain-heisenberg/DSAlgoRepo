@@ -6,3 +6,4 @@
 .vscode
 input.txt
 output.txt
+*.exe
