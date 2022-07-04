@@ -11,9 +11,9 @@ using namespace std;
 #define pi pair<int, int>
 #define inf 1000000000
 #define mod 1000000007
-#define rep(i,a,b) for(int i=a; i<b; i++)
-#define rrep(i,a,b) for(int i=b; i>=a; i--)
-//#define endl "\n"
+#define rep(i,a,b) for(int i=a; i<=b; i++)
+#define rrep(i,b,a) for(int i=b; i>=a; i--)
+#define all(a) a.begin(), a.end()
  
 int dx[4]={1,0,-1,0};
 int dy[4]={0,1,0,-1};
@@ -41,10 +41,11 @@ signed main(){
 	//freopen("output.txt", "w", stdout);
 	#endif
 	
-	int T=1;
+	int T=1, i=1;
 	cin>>T;
- 
-	while(T--){
+
+	while(i<=T){
 		solve();
+		i++;
 	}
 }

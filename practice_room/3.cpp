@@ -11,9 +11,9 @@ using namespace std;
 #define pi pair<int, int>
 #define inf 1000000000
 #define mod 1000000007
-#define rep(i,a,b) for(int i=a; i<b; i++)
-#define rrep(i,a,b) for(int i=b; i>=a; i--)
-//#define endl "\n"
+#define rep(i,a,b) for(int i=a; i<=b; i++)
+#define rrep(i,b,a) for(int i=b; i>=a; i--)
+#define all(a) a.begin(), a.end()
 
 const ll INF=1e18+5;
 
@@ -108,10 +108,11 @@ signed main(){
 
 	//preprocess();
 		
-	int T=1;
+	int T=1, i=1;
 	cin>>T;
 
-	while(T--){
+	while(i<=T){
 		solve();
+		i++;
 	}
 }
