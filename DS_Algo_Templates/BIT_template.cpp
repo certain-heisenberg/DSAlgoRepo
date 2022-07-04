@@ -28,7 +28,7 @@ int query(int i){      //returns sum of values in the range [1, i]
 	return sum;
 }
 
-// (#) Range Update and Point Query
+// (#) [Multiple] Range Update and [Multiple] Point Queries
 void range_update(int l, int r, int k){
 	update(l, k);
 	update(r+1, -k);
@@ -38,7 +38,7 @@ int point_query(int i){
 	return query(i);
 }
 
-// (#) Range Update and Range Query
+// (#) [Multiple] Range Update and [Multiple] Range Queries
 //NOTE:: This is discussed at the bottom of this notebook
 
 
@@ -128,7 +128,7 @@ signed main(){
 
 //NOTE:: Here we will find sum in 2-D Array
 
-int ft[1000][1000]
+int ft[1000][1000];
 
 void update_2d(int i, int j, int val){
 	while(i<=n){
@@ -145,7 +145,7 @@ int query_2d(int i, int j){
 	
 	while(i>0){
 		while(j>0){
-			val+=ft[i][j];
+			sum+=ft[i][j];
 			j-=j & (-j);
 		}
 		i-=i & (-i);
@@ -157,9 +157,9 @@ int query_2d(int i, int j){
 /* ************************* END  ************************** */
 
 
-// (#) Range Update and Range Query
+// (#) [Multiple] Range Updates and [Multiple] Range Queries
 
-//To support both Range Update and Range Query, two Fenwick Tress are needed
+//To support both [Multiple] Range Updates and [Multiple] Range Queres, two Fenwick Tress are needed
 //Namely ft1[] and ft2[], initialized with zeros
 const int maxN=1e5+5;
 
@@ -203,3 +203,8 @@ int range_query(int l, int r){      //returns sum of values in the range [l, r]
 	return prefix_query(r)-prefix_query(l-1);
 }
 
+void build_tree(){
+	for(int i=1; i<=n; i++){
+		range_update(i, i, arr[i]);
+	}
+}
