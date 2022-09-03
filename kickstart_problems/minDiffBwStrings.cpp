@@ -82,23 +82,23 @@ vector<string> diffBetweenTwoStrings(const string& s, const string& t)
 
 // M2: First fill the dp table with optimal answers, then construct answer string using this table
 
-vector<vector<int>> dp;
+vector<vector<int>> dp2;
 
-int solve(const string& s, const string& t, int i, int j){
-  if(i==s.size() && j==t.size()) return dp[i][j]=0;
-  if(i==s.size()) return dp[i][j]=t.size()-j;
-  if(j==t.size()) return dp[i][j]=s.size()-i;
+int solve2(const string& s, const string& t, int i, int j){
+  if(i==s.size() && j==t.size()) return dp2[i][j]=0;
+  if(i==s.size()) return dp2[i][j]=t.size()-j;
+  if(j==t.size()) return dp2[i][j]=s.size()-i;
   
-  if(dp[i][j]!=-1) return dp[i][j];
+  if(dp2[i][j]!=-1) return dp2[i][j];
   
   if(s[i]==t[j]){
-    return dp[i][j]=solve(s, t, i+1, j+1);
+    return dp2[i][j]=solve2(s, t, i+1, j+1);
   }
   else{
-    int ans1=solve(s, t, i+1, j);
-    int ans2=solve(s, t, i, j+1);
+    int ans1=solve2(s, t, i+1, j);
+    int ans2=solve2(s, t, i, j+1);
     
-    return dp[i][j]=min(ans1,ans2)+1;   
+    return dp2[i][j]=min(ans1,ans2)+1;   
   }
 }
 
@@ -111,7 +111,7 @@ void getAns(vector<string> &ans, const string& s, const string& t){
       i++, j++;
     }
     else{
-      if(dp[i+1][j]<=dp[i][j+1]){
+      if(dp2[i+1][j]<=dp2[i][j+1]){
         ans.push_back("-"+string(1,s[i]));
         i++;
       }
@@ -133,11 +133,12 @@ void getAns(vector<string> &ans, const string& s, const string& t){
   }
 }
 
-vector<string> diffBetweenTwoStrings(const string& s, const string& t)
+vector<string> diffBetweenTwoStrings2(const string& s, const string& t)
 {
-  dp.clear();
-  dp.resize(100, vector<int> (100, -1));
-  int res=solve(s, t, 0, 0);
+  dp2.clear();
+  dp2.resize(100, vector<int> (100, -1));
+  int res=solve2(s, t, 0, 0);
+  cout<<"Total edits: "<<res<<"\n";
   
   vector<string> ans;
   getAns(ans, s, t);
@@ -148,7 +149,7 @@ int main()
 {
   string s="ABCDEFG", t="ABDFFGH";
   
-  vector<string> ans=diffBetweenTwoStrings(s, t);
+  vector<string> ans=diffBetweenTwoStrings2(s, t);
   for(auto c: ans){
     cout<<c<<" ";
   }
