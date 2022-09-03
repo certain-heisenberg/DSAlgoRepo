@@ -48,8 +48,6 @@ void dfs(int v){
 	}
 }
 
-#define kk
-
 int main(){
 	#ifdef kk
 	freopen("input.txt", "r", stdin);
