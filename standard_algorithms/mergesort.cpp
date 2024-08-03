@@ -6,8 +6,9 @@ typedef long long ll;
 ll res;
 
 void merge(vector<int> &arr, int l, int mid, int r){
+    int total = arr.size();
     int n=mid-l+1;
-    int m=r-mid;
+    int m=total-n;
     
     vector<int> left(n, 0);
     vector<int> right(m, 0);
