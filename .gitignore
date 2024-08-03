@@ -8,3 +8,5 @@ input.txt
 output.txt
 *.exe
 .idea
+.*
+*.bin
