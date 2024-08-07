@@ -10,3 +10,5 @@ output.txt
 .idea
 .*
 *.bin
+*:tests
+*.sublime-workspace
