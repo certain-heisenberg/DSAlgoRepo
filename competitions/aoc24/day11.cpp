@@ -48,7 +48,7 @@ void solve_part_a(vector<string> &tokens){
     cout<<tokens.size()<<"\n";
 }
 
-long long recurse(vector<vector<long long>> &dp, long long val, int iteration){
+long long recurse(map<pair<long long,int>,long long> &dp, long long val, int iteration){
 	string s=to_string(val);
 	int k=s.size();
 	
@@ -64,7 +64,7 @@ long long recurse(vector<vector<long long>> &dp, long long val, int iteration){
 		}
 	}
 	
-	if(dp[val][iteration]!=-1) return dp[val][iteration];
+	if(dp.find({val,iteration})!=dp.end()) return dp[{val,iteration}];
 	
 	long long tempAns=0;
 	
@@ -84,14 +84,14 @@ long long recurse(vector<vector<long long>> &dp, long long val, int iteration){
 	
 	// cout<<val<<" **** "<<iteration<<"\n";
 	
-    return dp[val][iteration]=tempAns;
+    return dp[{val,iteration}]=tempAns;
 }
 
 void solve_part_b(vector<string> &tokens){
-	vector<vector<long long>> dp(1e7, vector<int>(10,-1));
+	map<pair<int,int>,int> dp;
 	long long ans=0;
 	for(string s: tokens){
-		ans+=recurse(dp,stoll(s),6);
+		ans+=recurse(dp,stoll(s),75);
 	}
     
     cout<<ans<<"\n";

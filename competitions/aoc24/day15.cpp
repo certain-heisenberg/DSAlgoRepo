@@ -23,49 +23,6 @@ char dir[4]={'D','L','U','R'};
  
 const int maxN=1e5+5;
 
-void solve_part_b(vector<vector<char>> v, string pattern){
-	vector<vector<char>> u;
-	for(int i=0; i<v.size(); i++){
-		vector<char> temp;
-		for(char c: v[i]){
-			if(c=='#'){
-				temp.push_back('#');
-				temp.push_back('#');
-			}
-			else if(c=='O'){
-				temp.push_back('[');
-				temp.push_back(']');
-			}
-			else if(c=='.'){
-				temp.push_back('.');
-				temp.push_back('.');
-			}
-			else if(c=='@'){
-				temp.push_back('@');
-				temp.push_back('.');
-			}
-		}
-		u.push_back(temp);
-	}
-
-	int si=-1, sj=-1;
-	int n=u.size(), m=u[0].size();
-	
-	for(int i=0; i<n; i++){
-		for(int j=0; j<m; j++){
-			if(u[i][j]=='@'){
-				si=i,sj=j;
-				u[i][j]='.';
-				break;
-			}
-		}
-	}
-
-	
-
-	
-}
-
 void solve_part_a(vector<vector<char>> &v, string pattern){
 	
 	int si=-1, sj=-1;
@@ -102,7 +59,6 @@ void solve_part_a(vector<vector<char>> &v, string pattern){
 		
 		int tempSi=si, tempSj=sj;
 		int shiftSiTo=-1, shiftSjTo=-1;
-		bool isShiftable=false;
 		
 		
 		while(true){
@@ -113,7 +69,6 @@ void solve_part_a(vector<vector<char>> &v, string pattern){
 			
 			if(v[a][b]=='.'){
 				shiftSiTo=a, shiftSjTo=b;
-				isShiftable=true;
 				break;
 			}
 			
@@ -183,7 +138,44 @@ void solve_part_a(vector<vector<char>> &v, string pattern){
 	cout<<ans<<"\n";
 }
 
-void solve_part_b(){
+void solve_part_b(vector<vector<char>> v, string pattern){
+	vector<vector<char>> u;
+	for(int i=0; i<v.size(); i++){
+		vector<char> temp;
+		for(char c: v[i]){
+			if(c=='#'){
+				temp.push_back('#');
+				temp.push_back('#');
+			}
+			else if(c=='O'){
+				temp.push_back('[');
+				temp.push_back(']');
+			}
+			else if(c=='.'){
+				temp.push_back('.');
+				temp.push_back('.');
+			}
+			else if(c=='@'){
+				temp.push_back('@');
+				temp.push_back('.');
+			}
+		}
+		u.push_back(temp);
+	}
+
+	int si=-1, sj=-1;
+	int n=u.size(), m=u[0].size();
+	
+	for(int i=0; i<n; i++){
+		for(int j=0; j<m; j++){
+			if(u[i][j]=='@'){
+				si=i,sj=j;
+				u[i][j]='.';
+				break;
+			}
+		}
+	}
+
 	
 }
 
