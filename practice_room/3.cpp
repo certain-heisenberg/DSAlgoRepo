@@ -88,8 +88,19 @@ bool isValid(int a, int b, int n, int m){
 
 //****DO NOT TOUCH ABOVE THIS LINE****//
 
+vector<string> splitString(string str, char delimiter) {
+    vector<string> result;
+    stringstream ss(str);
+    string token;
+
+    while (getline(ss, token, delimiter)) {
+        result.push_back(token);
+    }
+    return result;
+}
+
 void solve(){
-	
+
 }
 
 //****DO NOT TOUCH BELOW THIS LINE****//
@@ -109,7 +120,7 @@ signed main(){
 	//preprocess();
 		
 	int T=1, i=1;
-	cin>>T;
+	// cin>>T;
 
 	while(i<=T){
 		solve();
