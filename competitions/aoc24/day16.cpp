@@ -23,8 +23,17 @@ char dir[4]={'D','R','U','L'};
  
 const int maxN=1e5+5;
 
-void solve(){
+void solve_part_a(){
+    
+}
+
+void solve_part_b(){
 	
+}
+
+void solve(){
+	solve_part_a();
+	solve_part_b();
 }
  
 //****DO NOT TOUCH BELOW THIS LINE****//
@@ -38,7 +47,7 @@ signed main(){
  
 	#ifdef kk
 	freopen("input.txt", "r", stdin);
-	//freopen("output.txt", "w", stdout);
+	freopen("output.txt", "w", stdout);
 	#endif
 	
 	int T=1, i=1;
