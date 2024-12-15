@@ -16,15 +16,132 @@ using namespace std;
 #define all(a) a.begin(), a.end()
  
 int dx[4]={1,0,-1,0};
-int dy[4]={0,1,0,-1};
-char dir[4]={'D','R','U','L'};
+int dy[4]={0,-1,0,1};
+char dir[4]={'D','L','U','R'};
  
 //****DO NOT TOUCH ABOVE THIS LINE****//
  
 const int maxN=1e5+5;
 
-void solve_part_a(){
-    
+void solve_part_b(vector<vector<char>> &v, string pattern){
+	
+}
+
+void solve_part_a(vector<vector<char>> &v, string pattern){
+	
+	int si=-1, sj=-1;
+	int n=v.size(), m=v[0].size();
+	
+	for(int i=0; i<n; i++){
+		for(int j=0; j<m; j++){
+			if(v[i][j]=='@'){
+				si=i,sj=j;
+				v[i][j]='.';
+				break;
+			}
+		}
+	}
+	
+	for(char c: pattern){
+		int dirIdx = -1;
+		if(c=='<'){
+			dirIdx=1;
+		}
+		else if(c=='>'){
+			dirIdx=3;
+		}
+		else if(c=='^'){
+			dirIdx=2;
+		}
+		else{
+			dirIdx=0;
+		}
+		
+		// cout<<c<<" -- "<<dirIdx<<"\n";
+		
+		vector<pair<int,int>> objPos;
+		
+		int tempSi=si, tempSj=sj;
+		int shiftSiTo=-1, shiftSjTo=-1;
+		bool isShiftable=false;
+		
+		
+		while(true){
+			int a=tempSi+dx[dirIdx], b=tempSj+dy[dirIdx];
+			if(v[a][b]=='#'){
+				break;
+			}
+			
+			if(v[a][b]=='.'){
+				shiftSiTo=a, shiftSjTo=b;
+				isShiftable=true;
+				break;
+			}
+			
+			tempSi=a,tempSj=b;
+		}
+		
+		tempSi=si, tempSj=sj;
+		
+		if(shiftSiTo!=-1 && shiftSjTo!=-1){
+			while(true){
+				if(tempSi==shiftSiTo && tempSj==shiftSjTo){
+					break;
+				}
+				if(v[tempSi][tempSj]=='O'){
+					objPos.push_back({tempSi,tempSj});
+				}
+				
+				tempSi+=dx[dirIdx];
+				tempSj+=dy[dirIdx];
+			}
+		}
+			
+		
+		reverse(objPos.begin(),objPos.end());
+		for(auto p: objPos){
+			int a=p.first+dx[dirIdx];
+			int b=p.second+dy[dirIdx];
+			
+			v[p.first][p.second]='.';
+			v[a][b]='O';
+		}
+		
+		tempSi=si+dx[dirIdx];
+		tempSj=sj+dy[dirIdx];
+		
+		if(v[tempSi][tempSj]!='O' && v[tempSi][tempSj]!='#'){
+			si=tempSi;
+			sj=tempSj;
+		}
+		
+		// for(int i=0; i<n; i++){
+		// 	for(int j=0; j<m; j++){
+		// 		if(si==i && sj==j){
+		// 			cout<<"@";
+		// 		}
+		// 		else{
+		// 			cout<<v[i][j];
+		// 		}
+		// 	}
+		// 	cout<<"\n";
+		// }
+		
+		// cout<<"\n\n";
+		
+	}
+	
+	int ans=0;
+	
+	for(int i=0; i<n; i++){
+		for(int j=0; j<m; j++){
+			if(v[i][j]=='O'){
+				ans+=100*i+j;
+			}
+		}
+	}
+	
+	cout<<ans<<"\n";
 }
 
 void solve_part_b(){
@@ -32,8 +149,27 @@ void solve_part_b(){
 }
 
 void solve(){
-	solve_part_a();
-	solve_part_b();
+	string line;
+	vector<vector<char>> v;
+	
+	while(getline(cin,line)){
+		if(!line.empty()){
+			vector<char> temp;
+			for(char c: line){
+				temp.push_back(c);
+			}
+			v.push_back(temp);
+		}
+		else{
+			break;
+		}
+	}
+	
+	string pattern;
+	getline(cin,pattern);
+	
+	solve_part_a(v, pattern);
+	solve_part_b(v, pattern);
 }
  
 //****DO NOT TOUCH BELOW THIS LINE****//

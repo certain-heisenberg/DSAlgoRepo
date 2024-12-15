@@ -48,29 +48,53 @@ void solve_part_a(vector<string> &tokens){
     cout<<tokens.size()<<"\n";
 }
 
+long long recurse(vector<vector<long long>> &dp, long long val, int iteration){
+	string s=to_string(val);
+	int k=s.size();
+	
+	if(iteration == 1){
+		if(s=="0"){
+			return 1;
+		}
+		else if(k%2==0){
+			return 2;
+		}
+		else{
+			return 1;
+		}
+	}
+	
+	if(dp[val][iteration]!=-1) return dp[val][iteration];
+	
+	long long tempAns=0;
+	
+	if(s=="0"){
+		tempAns=recurse(dp, 1, iteration-1);
+	}
+	else if(k%2==0){
+		string s1=s.substr(0,k/2);
+		string s2=s.substr(k/2,k/2);
+		// cout<<iteration<<" "<<s1<<" ---  "<<s2<<"\n";
+		tempAns=recurse(dp, stoll(s1), iteration-1)+recurse(dp, stoll(s2), iteration-1);
+	}
+	else{
+		// cout<<iteration<<" "<<stoll(s)*2024<<" |||\n";
+		tempAns=recurse(dp, stoll(s)*2024, iteration-1);
+	}
+	
+	// cout<<val<<" **** "<<iteration<<"\n";
+	
+    return dp[val][iteration]=tempAns;
+}
+
 void solve_part_b(vector<string> &tokens){
-	for(int i=0; i<75; i++){
-    	vector<string> temp;
-    	
-    	for(string s: tokens){
-    		int k=s.size();
-    		if(s=="0"){
-    			temp.push_back("1");
-    		}
-    		else if(k%2==0){
-    			string s1=s.substr(0,k/2);
-    			string s2=s.substr(k/2,k/2);
-    			temp.push_back(to_string(stoll(s1)));
-    			temp.push_back(to_string(stoll(s2)));
-    		}
-    		else{
-    			temp.push_back(to_string(stoll(s)*2024));
-    		}
-    	}
-    	tokens=temp;
-    }
+	vector<vector<long long>> dp(1e7, vector<int>(10,-1));
+	long long ans=0;
+	for(string s: tokens){
+		ans+=recurse(dp,stoll(s),6);
+	}
     
-    cout<<tokens.size()<<"\n";
+    cout<<ans<<"\n";
 }
 
 void solve(){
@@ -87,7 +111,7 @@ void solve(){
     }
 
 	solve_part_a(tokens);
-	solve_part_b(tokens);
+	// solve_part_b(tokens);
 }
  
 //****DO NOT TOUCH BELOW THIS LINE****//
